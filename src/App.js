@@ -3,8 +3,8 @@ import {  BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/Home'
 import DashboardPage from './pages/Dashboard'
 import CoinPage from './pages/Coin'
-import ComparePage from './pages/compare'
-import WatchlistPage from './pages/watchlist'
+import ComparePage from '@mui/utils/composeClasses'
+import WatchlistPage from './pages/Watchlist'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 
