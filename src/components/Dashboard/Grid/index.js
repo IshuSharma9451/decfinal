@@ -26,7 +26,7 @@ function Grid({ coin, delay, isWatchlistPage }) {
       >
         <div className="info-flex">
           <div className="coin-info-flex">
-            <img src={coin.image} className="coin-image" alt="coin-image" />
+            <img src={coin.image} className="coin-image" alt="coin" />
             <div className="coin-name-flex">
               <h3 className="coin-symbol">{coin.symbol}</h3>
               <p className="coin-name">{coin.name}</p>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {  BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/Home'
 import DashboardPage from './pages/Dashboard'
@@ -10,11 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
-var cursor;
-var cursorPointer;
-
-
-
   return (
     <div className='app'>
     <div className="cursor" id="cursor" />
