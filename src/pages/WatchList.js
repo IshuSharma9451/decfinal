@@ -1,43 +1,62 @@
 import React, { useEffect, useState } from "react";
-import Header from "../component/Common/Header";
-import TabsComponent from "../component/Dashboard/Tabs";
-import BackToTop from "../component/Common/BackToTop";
-import { getWatchListData } from "../functions/getWatchListData";
-import { Link } from "react-router-dom";
-import Button from "../component/Common/Button";
+import Button from "../components/Common/Button";
+// import Footer from "../components/Common/Footer";
+import Header from "../components/Common/Header";
+import Loader from "../components/Common/Loader/loader";
+import TabsComponent from "../components/Dashboard/Tabs";
+import { get100Coins } from "../functions/get100Coins";
 
-function WatchList() {
-    const [coins, setCoins] = useState([]);
+function WatchlistPage() {
+  const coins = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const [myWatchlist, setMyWatchlist] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        getData();
-    }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
-    const getData = async () => {
-        const myCoins = await getWatchListData();
-        if (myCoins) {
-            setCoins(myCoins);
-        }
-    };
+  const getData = async () => {
+    setLoading(true);
+    const allCoins = await get100Coins();
+    if (coins) {
+      setMyWatchlist(allCoins.filter((item) => coins.includes(item.id)));
+    }
+    setLoading(false);
+  };
 
-    return (
-        <>
-            <Header />
-            <BackToTop />
+  return (
+    <div>
+      {loading || !coins ? (
+        <Loader />
+      ) : (
+        <div style={{ minHeight: "90vh" }}>
+          {myWatchlist?.length == 0 || !coins ? (
             <div>
-                {coins.length > 0 ? (
-                    <TabsComponent coins={coins} />
-                ) : (
-                    <div className="empty-watchlist">
-                        <h3>Nothing in the watchlist :( </h3>
-                        <Link to="/dashboard">
-                            <Button text="Dashboard" />
-                        </Link>
-                    </div>
-                )}
+              <Header />
+              <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+                No Items in the Watchlist
+              </h1>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <a href="/dashboard">
+                  <Button text={"Dashboard"} />
+                </a>
+              </div>
             </div>
-        </>
-    );
+          ) : (
+            <div style={{ height: "95vh" }}>
+              <Header />
+              <TabsComponent coins={myWatchlist} isWatchlistPage={true} />
+              {/* <TabsComponent coins={myWatchlist} isWatchlistPage={true} /> */}
+            </div>
+          )}
+          
+        </div>
+      )}
+      {/* <Footer/> */}
+    </div>
+   
+  );
+ 
 }
 
-export default WatchList;
+export default WatchlistPage;

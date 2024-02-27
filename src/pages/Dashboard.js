@@ -1,70 +1,70 @@
-import React, { useEffect, useState } from "react";
-import Header from "../component/Common/Header";
-import TabsComponent from "../component/Dashboard/Tabs";
-import Search from "../component/Dashboard/Search";
-import PaginationComponent from "../component/Dashboard/Pagination";
-import Loader from "../component/Common/Loader";
-import BackToTop from "../component/Common/BackToTop";
-import { get100Coins } from "../functions/get100Coins";
+import React, { useEffect, useState } from 'react'
+import Header from '../components/Common/Header'
+import TabsComponent from '../components/Dashboard/Tabs'
+import SearchComponent from '../components/Dashboard/Search/search';
+import PaginationComponent from '../components/Dashboard/Pagination/pagination';
+import { get100Coins } from '../functions/get100Coins';
+import Loader from "../components/Common/Loader/loader";
+import TopButton from '../components/Common/BackToTop/topButton';
+import Footer from '../components/Common/Footer';
 
-function Dashboard() {
-    const [coins, setCoins] = useState([]);
-    const [paginatedCoins, setPaginatedCoins] = useState([]);
-    const [search, setSearch] = useState("");
-    const [page, setPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(true);
+function DashboardPage() {
+  const [loading, setLoading] = useState(false);
+  const [coins, setcoins] = useState([]);
+  const [search, setSearch] = useState('')
+  const [pageNumber, setPageNumber] = useState(1);
+  const [paginatedCoins, setPaginatedCoins] = useState([]);
 
-    const handlePageChange = (event, value) => {
-        setPage(value);
-        const prevIndex = (value - 1) * 10;
-        setPaginatedCoins(coins.slice(prevIndex, prevIndex + 10));
-    };
 
-    const onSearchChange = (e) => {
-        setSearch(e.target.value);
-    };
+  const handlePageChange = (event, value) => {
+    setPageNumber(value);
+    var startingIndex = (value - 1) * 10;
+    setPaginatedCoins(coins.slice(startingIndex, startingIndex + 10));
+  };
 
-    const filteredCoins = coins.filter(
-        (coin) =>
-            coin.name.toLowerCase().includes(search.toLowerCase()) ||
-            coin.symbol.toLowerCase().includes(search.toLowerCase())
-    );
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  }
 
-    useEffect(() => {
-        getData();
-    }, []);
+  var filterCoin = coins.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()) || item.symbol.toLowerCase().includes(search.toLowerCase()));
 
-    const getData = async () => {
-        const myCoins = await get100Coins();
-        if(myCoins){
-            setCoins(myCoins);
-            setPaginatedCoins(myCoins.slice(0, 10));
-            setIsLoading(false);
-        }
-    };
+  useEffect(() => {
+    getData();
+  }, []);
 
-    return (
-        <>
-            <Header />
-            <BackToTop />
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <div>
-                    <Search search={search} onSearchChange={onSearchChange} />
-                    <TabsComponent
-                        coins={search ? filteredCoins : paginatedCoins}
-                    />
-                    {!search && (
-                        <PaginationComponent
-                            page={page}
-                            handlePageChange={handlePageChange}
-                        />
-                    )}
-                </div>
-            )}
-        </>
-    );
+  const getData = async () => {
+    setLoading(true);
+    const data = await get100Coins ();
+    if (data) {
+      setcoins(data);
+      setPaginatedCoins(data.slice(0, 10));  
+      setLoading(false);
+    }
+  };
+  return (
+    <>
+      <TopButton />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div style={{ minHeight: "90vh" }}>
+          <Header />
+          <SearchComponent search={search} onChange={onChange} />
+          <TabsComponent
+            coins={search ? filterCoin : paginatedCoins}
+            setSearch={setSearch}
+          />
+          {!search && (
+            <PaginationComponent
+              pageNumber={pageNumber}
+              handleChange={handlePageChange}
+            />
+          )}
+        </div>
+      )}
+      <Footer />
+    </>
+  );
 }
 
-export default Dashboard;
+export default DashboardPage
