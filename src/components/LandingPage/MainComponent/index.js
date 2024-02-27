@@ -79,7 +79,7 @@ function LandingPageComponent() {
         </motion.div>
       </div>
       <div className="landing-right">
-        <img src={gradient} className="gradient" />
+        <img src={gradient} className="gradient" alt="gradient" />
         <motion.img
           src={iPhone}
           className="iphone"

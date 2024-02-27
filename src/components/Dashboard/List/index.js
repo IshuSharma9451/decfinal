@@ -25,7 +25,7 @@ function List({ coin, delay, isWatchlistPage }) {
       >
         <Tooltip placement="bottom-start" title="logo">
           <td className="td-img">
-            <img src={coin.image} className="coin-image" />
+            <img src={coin.image} className="coin-image" alt="coin-image" />
           </td>
         </Tooltip>
         <Tooltip placement="bottom-start" title="Coin info">

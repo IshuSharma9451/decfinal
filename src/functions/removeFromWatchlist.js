@@ -6,7 +6,7 @@ export const removeFromWatchlist = (id) => {
     let arr = JSON.parse(items);
     localStorage.setItem(
       "Watchlist",
-      JSON.stringify(arr.filter((item) => item != id))
+      JSON.stringify(arr.filter((item) => item !== id))
     );
     toast.success(
       `${

@@ -1,6 +1,6 @@
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 
 function PriceToggle({ priceType, handlePriceTypeChange }) {

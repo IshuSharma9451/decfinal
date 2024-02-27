@@ -7,11 +7,11 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 export default function MobileDrawer() {
   const [flag, setFlag] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") == "dark" ? true : false
+    localStorage.getItem("theme") === "dark" ? true : false
   );
 
   useEffect(() => {
-    if (localStorage.getItem("theme") == "dark") {
+    if (localStorage.getItem("theme") === "dark") {
       setDark();
     } else {
       setLight();
@@ -22,7 +22,7 @@ export default function MobileDrawer() {
     setDarkMode(!darkMode);
     toast.success("Theme Changed!");
     const mode = localStorage.getItem("theme");
-    if (mode == "dark") {
+    if (mode === "dark") {
       setLight();
     } else {
       setDark();

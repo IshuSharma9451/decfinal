@@ -26,7 +26,7 @@ function CoinPage() {
 
   useEffect(() => {
     getData();
-  }, [id]);
+  },);
 
   const getData = async () => {
     setLoading(true);
