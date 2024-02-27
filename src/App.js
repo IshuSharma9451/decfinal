@@ -57,7 +57,7 @@ useEffect(() => {
           <Route path="/Dashboard" element={<DashboardPage />} />
           <Route path="/Coin/:id" element={<CoinPage />} />
            <Route path="/compare" element={<ComparePage />} />
-          <Route path="/watchlist" element={<WatchlistPage />} />
+          <Route path="/Watchlist" element={<WatchlistPage />} />
         </Routes>
       </BrowserRouter>
     </div>

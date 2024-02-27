@@ -59,7 +59,7 @@ function Header() {
         <a href="/compare">
           <p className="link">Compare</p>
         </a>
-        <a href="/watchlist">
+        <a href="/Watchlist">
           <p className="link">Watchlist</p>
         </a>
         <a href="/Dashboard">
