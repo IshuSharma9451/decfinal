@@ -114,14 +114,14 @@ function List({ coin, delay, isWatchlistPage }) {
           >
             {added ? (
               <StarRoundedIcon
-                className={`watchlist-icon ${
-                  coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                className={`Watchlist-icon ${
+                  coin.price_change_percentage_24h < 0 && "Watchlist-icon-red"
                 } `}
               />
             ) : (
               <StarBorderRoundedIcon
-                className={`watchlist-icon ${
-                  coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                className={`Watchlist-icon ${
+                  coin.price_change_percentage_24h < 0 && "Watchlist-icon-red"
                 } `}
               />
             )}
